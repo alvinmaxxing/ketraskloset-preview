@@ -1087,3 +1087,9 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
 .site-header .header-inner{height:64px;padding-top:0!important;padding-bottom:0!important}
 .logo-foot{width:200px!important;height:auto!important}
 @media(max-width:859px){:root{--header-h:56px}.site-header .header-inner{height:56px}.site-header .logo-img{width:142px!important}.logo-foot{width:170px!important}}
+/* v9 medium logo */
+:root{--header-h:68px}
+.site-header .logo-img{width:208px!important}
+.site-header .header-inner{height:68px}
+.logo-foot{width:230px!important}
+@media(max-width:859px){:root{--header-h:58px}.site-header .header-inner{height:58px}.site-header .logo-img{width:162px!important}.logo-foot{width:190px!important}}
