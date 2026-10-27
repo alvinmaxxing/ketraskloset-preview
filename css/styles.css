@@ -1046,3 +1046,38 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
 @media(max-width:1100px) and (min-width:860px){.logo-img{width:auto;height:50px}}
 @media(max-width:859px){:root{--header-h:62px}.logo-img{width:auto;height:42px;max-width:calc(100vw - 150px)}.logo-foot{width:min(70vw,220px)}}
 .logo-img.logo-foot{height:auto!important;max-width:100%}
+
+/* ===== Maison header v7 ===== */
+:root{--ivory:#FBF8F3;--hair:rgba(184,151,90,.45)}
+.announce{background:var(--ivory)!important;color:#5a4a3a;border-bottom:1px solid var(--hair);font-size:10.5px;letter-spacing:.24em;font-weight:500;padding:8px 1rem}
+.announce .sale-word{color:var(--rose-deep);font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:.02em;font-size:12.5px;font-weight:500}
+.site-header,.site-header.is-scrolled{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)!important;box-shadow:none;transition:box-shadow .3s}
+.site-header.is-scrolled{box-shadow:0 6px 24px -14px rgba(20,16,20,.22)}
+.site-header .header-inner{max-width:1440px;margin:0 auto;padding-left:clamp(16px,3vw,48px)!important;padding-right:clamp(12px,3vw,48px)!important;display:flex;align-items:center;gap:24px}
+.site-header .logo{flex:0 0 auto;display:block;line-height:0}
+.site-header .logo-img{display:block;max-width:none}
+.site-header .nav{flex:1 1 auto;justify-content:center;gap:clamp(1.1rem,2.2vw,2.6rem)}
+.site-header .nav a{font-size:10.5px;letter-spacing:.24em;font-weight:500;color:var(--ink);text-transform:uppercase;padding:6px 0;white-space:nowrap}
+.site-header .nav a::after{background:var(--gold);height:1px;bottom:0}
+.site-header .nav a:hover{color:var(--ink)}
+.site-header .nav a.jw-nav{color:#9a7b45}
+.site-header .nav a.sale{color:var(--rose-deep)}
+.site-header .header-actions{flex:0 0 auto;display:flex;align-items:center;gap:12px}
+.site-header .sa-btn{border:1px solid rgba(20,16,20,.25)!important;border-radius:999px;background:transparent;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:8px 16px;color:var(--ink)}
+.site-header .sa-btn:hover{border-color:var(--gold)!important}
+.sale-ribbon{background:var(--ivory)!important;color:#5a4a3a!important;border-top:1px solid var(--hair);font-size:10px!important;letter-spacing:.3em!important;font-weight:500!important;padding:9px 1rem!important}
+.sale-ribbon b{color:var(--rose-deep);font-size:.95rem!important}
+@media(min-width:860px) and (max-width:1180px){
+ .site-header .header-inner{gap:16px}
+ .site-header .nav{gap:clamp(.8rem,1.4vw,1.2rem)}
+ .site-header .nav a{font-size:9.5px;letter-spacing:.16em}
+ .site-header .sa-btn .sa-lbl{display:none}
+ .site-header .sa-btn{padding:8px 10px}
+}
+@media(max-width:859px){
+ .site-header .header-inner{gap:6px;padding-left:16px!important}
+ .site-header .nav{background:var(--ivory);border-bottom:1px solid var(--hair)}
+ .site-header .nav a{font-size:12px;padding:14px 0}
+ .announce{font-size:9px;letter-spacing:.14em}
+ .sale-ribbon{font-size:9px!important;letter-spacing:.18em!important}
+}
