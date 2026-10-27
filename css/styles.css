@@ -1045,3 +1045,4 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
 .logo-foot{width:min(100%,260px);height:auto;aspect-ratio:990/272}
 @media(max-width:1100px) and (min-width:860px){.logo-img{width:auto;height:50px}}
 @media(max-width:859px){:root{--header-h:62px}.logo-img{width:auto;height:42px;max-width:calc(100vw - 150px)}.logo-foot{width:min(70vw,220px)}}
+.logo-img.logo-foot{height:auto!important;max-width:100%}
