@@ -6,7 +6,7 @@ function local(){try{return JSON.parse(localStorage[LS]||'[]')}catch(e){return[]
 function save(){if(!A.user())localStorage[LS]=JSON.stringify(wish);paint()}
 window.SHOP_WISH_COUNT=function(){return wish.length};
 wish=local();
-A.onChange(function(u){if(u){had=true;var l=local();A.wishMerge(l).then(function(){return A.wishLoad()}).then(function(db){if(db){wish=Array.from(new Set(db.concat(l)));paint();savedGrid()}})}else if(had){wish=local();paint()}});
+A.onChange(function(u){if(u){had=true;var l=local();A.wishMerge(l).then(function(){return A.wishLoad()}).then(function(db){if(db){wish=Array.from(new Set(db.concat(l,wish)));paint();savedGrid()}})}else if(had){wish=local();paint()}});
 var qs=new URLSearchParams(location.search),pid=qs.get('id');
 function isPiece(){return /piece(\.html)?$/.test(location.pathname)}
 function paint(){var b=document.getElementById('kk-save');if(!b)return;var on=wish.indexOf(pid)>=0;b.setAttribute('aria-pressed',on);b.innerHTML=(on?'♥ Saved':'♡ Save to wishlist')}
