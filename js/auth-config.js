@@ -1,5 +1,5 @@
 // Supabase (accounts, database). Publishable key only: safe to be public. Never paste a service_role/secret key here.
-window.SHOP_AUTH={url:'https://pdyqbeiicbnazqpynqbf.supabase.co',key:'sb_publishable_Rt2vwej8hFB9VRuE6q8IEg_RDNxhB_R',name:'Ketras Kloset',currency:'UGX',
+window.SHOP_AUTH={url:'https://pdyqbeiicbnazqpynqbf.supabase.co',key:'sb_publishable_Rt2vwej8hFB9VRuE6q8IEg_RDNxhB_R',name:'Ketra’s Kloset',currency:'UGX',
  google:true, redirect:'https://alvinmaxxing.github.io/ketraskloset-preview/',
  mount:'.header-actions',mountFirst:true,home:'shop.html',
  onWishOpen:function(){location.href='shop.html?saved=1'},

@@ -1011,3 +1011,15 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
 .logo-img{height:48px;width:auto;max-width:none;aspect-ratio:972/324}
 .logo-foot{height:84px}
 @media(max-width:700px){.logo-img{height:40px}.logo-foot{height:72px}}
+/* Logo v3: site palette + larger */
+.logo-img{height:68px;aspect-ratio:960/312}
+.site-header .header-inner{padding-top:4px;padding-bottom:4px}
+.logo-foot{height:120px}
+.footer-brand .logo{display:inline-block;margin-bottom:1.1rem}
+@media(max-width:700px){
+  .logo-img{height:50px;max-width:calc(100vw - 150px)}
+  .logo-foot{height:92px;max-width:100%}
+  .footer-brand .logo{margin-bottom:1rem}
+  .footer-brand p{line-height:1.6}
+  .footer-inner{row-gap:2rem}
+}
