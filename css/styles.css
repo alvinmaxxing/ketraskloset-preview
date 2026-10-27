@@ -1008,6 +1008,6 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
 @media(min-width:700px){.jw-tile.jw-all{grid-column:span 3}}
 
 /* Ketra’s Kloset master logo */
-.logo-img{height:46px;width:auto;max-width:none;aspect-ratio:1037/400}
+.logo-img{height:48px;width:auto;max-width:none;aspect-ratio:972/324}
 .logo-foot{height:84px}
-@media(max-width:700px){.logo-img{height:38px}.logo-foot{height:72px}}
+@media(max-width:700px){.logo-img{height:40px}.logo-foot{height:72px}}
