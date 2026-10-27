@@ -8,7 +8,8 @@
   function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
   function fmt(n){return window.formatPrice ? window.formatPrice(n) : 'UGX '+Number(n).toLocaleString('en-US')}
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-  var state = { gift: null, giftBal: 0, pts: null, usePts: false };
+  var state = { gift: null, giftBal: 0, pts: null, usePts: false, promo: (function(){try{return localStorage.getItem('kkPromo')}catch(e){return null}})() };
+  var PROMOS = { KLOSET10: 0.10 }; // welcome offer; checked in the browser only, the shop confirms on WhatsApp
 
   function sb(){ if (window.ACCT && window.ACCT.sb) return window.ACCT.sb;
     if (!state._sb && window.supabase && window.SHOP_AUTH) state._sb = window.supabase.createClient(window.SHOP_AUTH.url, window.SHOP_AUTH.key, {auth:{persistSession:false}});
@@ -36,14 +37,16 @@
 
   function totals(){ var L=lines(), sub=L.reduce(function(s,l){return s+(l.price||0)},0);
     var pieces=L.filter(function(l){return !l.gift}).reduce(function(s,l){return s+l.price},0);
-    var gift = state.gift ? Math.min(state.giftBal, pieces) : 0;
-    var ptsOff = (state.usePts && state.pts) ? Math.min(Math.floor(state.pts/100)*100*window.KK_POINT_VALUE_UGX, Math.max(0,sub-gift)) : 0;
-    return {L:L, sub:sub, gift:gift, ptsOff:ptsOff, ptsUsed: ptsOff/window.KK_POINT_VALUE_UGX, total:Math.max(0,sub-gift-ptsOff)}; }
+    var promoOff = (state.promo && PROMOS[state.promo]) ? Math.round(pieces*PROMOS[state.promo]) : 0;
+    var gift = state.gift ? Math.min(state.giftBal, pieces-promoOff) : 0;
+    var ptsOff = (state.usePts && state.pts) ? Math.min(Math.floor(state.pts/100)*100*window.KK_POINT_VALUE_UGX, Math.max(0,sub-promoOff-gift)) : 0;
+    return {L:L, sub:sub, promoOff:promoOff, gift:gift, ptsOff:ptsOff, ptsUsed: ptsOff/window.KK_POINT_VALUE_UGX, total:Math.max(0,sub-promoOff-gift-ptsOff)}; }
 
   function waLink(){ var t=totals(); if(!t.L.length) return WA_NUM;
     var m = "Hi Ketra's Kloset! I'd like to order:\n";
     t.L.forEach(function(l,i){ m += (i+1)+'. '+l.name+(l.id?' ('+l.id+')':'')+(l.gift&&l.raw.msg?' “'+l.raw.msg+'”':'')+' — '+fmt(l.price)+'\n'+(l.gift&&l.raw.toEmail?'   Recipient email: '+l.raw.toEmail+'\n':'')+(l.gift&&(l.raw.from||l.raw.fromEmail)?'   From: '+[l.raw.from,l.raw.fromEmail].filter(Boolean).join(', ')+'\n':''); });
     m += 'Subtotal: '+fmt(t.sub)+'\n';
+    if (t.promoOff) m += 'Welcome code '+state.promo+' (10% off pieces): −'+fmt(t.promoOff)+' (please confirm)\n';
     if (t.gift) m += 'Gift card '+state.gift+': −'+fmt(t.gift)+' (please confirm balance)\n';
     if (t.ptsOff) m += 'Kloset Circle: redeem '+t.ptsUsed+' points −'+fmt(t.ptsOff)+' (please confirm)\n';
     m += 'Total: '+fmt(t.total)+'\n\nI\'ll pay by Airtel Money to +256 700 929 189. Please confirm availability and delivery.';
@@ -85,13 +88,14 @@
     var h='<ul class="kk-list">'+t.L.map(function(l){
       return '<li><div class="kk-th'+(l.gift?' kk-gift-th':'')+'">'+(l.img?'<img src="'+l.img+'" alt="">':'<span>KK</span>')+'</div><div class="kk-li"><div class="kk-nm">'+esc(l.name)+'</div><div class="kk-sub">'+esc(l.sub)+'</div><div class="kk-row"><span class="kk-pr">'+fmt(l.price)+'</span><button type="button" class="kk-rm" data-kk-rm="'+esc(l.key)+'">Remove</button></div></div></li>'; }).join('')+'</ul>';
     h+='<div class="kk-foot">';
+    h+='<details class="kk-gc kk-pc"'+(state.promo||state.pcMsg?' open':'')+'><summary>Have a promo code?</summary>'+(state.promo?'<div class="kk-gc-row"><span class="kk-pc-on">'+esc(state.promo)+' · 10% off pieces</span><button type="button" class="kk-mini" data-kk-pcx>Remove</button></div>':'<div class="kk-gc-row"><input id="kk-pc-in" placeholder="KLOSET10" autocomplete="off" autocapitalize="characters"><button type="button" class="kk-mini" data-kk-pc>Apply</button></div>')+'<p class="kk-note">'+(state.pcMsg?esc(state.pcMsg):'One use per customer, new orders only; the shop confirms your code. Not valid on gift cards.')+'</p></details>';
     h+='<details class="kk-gc"'+(state.gift||state.gcMsg?' open':'')+'><summary>Have a gift card? Enter code</summary><div class="kk-gc-row"><input id="kk-gc-in" placeholder="KK-XXXXXXXXXX" autocomplete="off" value="'+esc(state.gift||'')+'"><button type="button" class="kk-mini" data-kk-gc>Apply</button></div><p class="kk-note" id="kk-gc-msg">'+(state.gcMsg?esc(state.gcMsg):state.gift?'Code '+esc(state.gift)+' has '+fmt(state.giftBal)+' available. The shop confirms the balance on WhatsApp.':'Gift card credit applies to pieces, not to other gift cards. The shop confirms the balance on WhatsApp.')+'</p></details>';
     if (window.ACCT && window.ACCT.user()) {
       if (state.pts==null) h+='<p class="kk-note">Kloset Circle: loading your points…</p>';
       else if (state.pts>=100) h+='<label class="kk-pts"><input type="checkbox" data-kk-pts'+(state.usePts?' checked':'')+'> Redeem Kloset Circle points <span>('+state.pts+' pts, up to '+fmt(Math.floor(state.pts/100)*100*window.KK_POINT_VALUE_UGX)+')</span></label>';
       else h+='<p class="kk-note">Kloset Circle: '+state.pts+' points. Redeem from 100 points. <a href="loyalty.html">How it works</a></p>';
     } else h+='<p class="kk-note"><a href="loyalty.html">Kloset Circle</a>: sign in to earn points on this order.</p>';
-    h+='<dl class="kk-sum"><dt>Subtotal</dt><dd>'+fmt(t.sub)+'</dd>'+(t.gift?'<dt>Gift card</dt><dd>−'+fmt(t.gift)+'</dd>':'')+(t.ptsOff?'<dt>Points ('+t.ptsUsed+')</dt><dd>−'+fmt(t.ptsOff)+'</dd>':'')+'<dt class="kk-tot">Total</dt><dd class="kk-tot">'+fmt(t.total)+'</dd></dl>';
+    h+='<dl class="kk-sum"><dt>Subtotal</dt><dd>'+fmt(t.sub)+'</dd>'+(t.promoOff?'<dt>Welcome 10% ('+esc(state.promo)+')</dt><dd>−'+fmt(t.promoOff)+'</dd>':'')+(t.gift?'<dt>Gift card</dt><dd>−'+fmt(t.gift)+'</dd>':'')+(t.ptsOff?'<dt>Points ('+t.ptsUsed+')</dt><dd>−'+fmt(t.ptsOff)+'</dd>':'')+'<dt class="kk-tot">Total</dt><dd class="kk-tot">'+fmt(t.total)+'</dd></dl>';
     h+='<a class="kk-btn kk-btn-dark" id="kk-wa-order" href="'+waLink()+'" target="_blank" rel="noopener">Order on WhatsApp</a>'; h+='<p class="pol-agree">By ordering you agree to our <a href="returns.html">Final sale</a> and <a href="privacy.html">Privacy</a> policies.</p><p class="pol-agree kk-final">Closet sale pieces are final sale: no returns, refunds or exchanges.</p>';
     h+='<p class="kk-note kk-center">Pay by Airtel Money to <b>+256 700 929 189</b>. We confirm availability and delivery in the chat.</p></div>';
     return h; }
@@ -114,7 +118,14 @@
     var r=t.closest('[data-kk-rm]'); if(r){ B.remove(r.getAttribute('data-kk-rm')); return; }
     var u=t.closest('[data-kk-unfav]'); if(u){ B.toggleFav(u.getAttribute('data-kk-unfav')); return; }
     if (t.closest('[data-kk-pts]')) { state.usePts=t.checked; return paint(); }
-    if (t.closest('[data-kk-gc]')) return applyGift(); }
+    if (t.closest('[data-kk-gc]')) return applyGift();
+    if (t.closest('[data-kk-pc]')) return applyPromo();
+    if (t.closest('[data-kk-pcx]')) { state.promo=null; state.pcMsg=null; try{localStorage.removeItem('kkPromo')}catch(e){} return paint(); } }
+
+  function applyPromo(){ var i=document.getElementById('kk-pc-in'), code=(i&&i.value||'').trim().toUpperCase();
+    if(PROMOS[code]){ state.promo=code; state.pcMsg=null; try{localStorage.setItem('kkPromo',code)}catch(e){} }
+    else { state.pcMsg=code?'That code isn’t valid.':'Enter your code first.'; }
+    paint(); }
 
   function applyGift(){ var inp=document.getElementById('kk-gc-in'), msg=document.getElementById('kk-gc-msg'); var code=(inp.value||'').trim().toUpperCase();
     if(!code){ state.gift=null; state.gcMsg=null; return paint(); }
