@@ -49,7 +49,12 @@ window.renderProductCard = function (product) {
     for (var i = 0; i < Math.min(imgs.length, 6); i++) dots += '<i' + (i === 0 ? ' class="on"' : '') + '></i>';
     dots += '</span>';
   }
+  var pid = window.escAttr(product.id), sold = product.available === false;
+  clearTimeout(window.__kkCardT); window.__kkCardT = setTimeout(function () { if (window.KK_BASKET) window.KK_BASKET.paint(); if (window.KK_REVIEWS) window.KK_REVIEWS.paintCards(); }, 30);
+  var waUrl = window.whatsAppLink ? window.whatsAppLink(product) : "#";
   return (
+    '<div class="kk-card">' +
+    '<button type="button" class="kk-heart" data-kk-fav="' + pid + '" aria-pressed="false" aria-label="Save to favourites">' + (window.KK_ICON_HEART || '&#9825;') + '</button>' +
     '<a class="product-card" href="piece.html?id=' + encodeURIComponent(product.id) + '">' +
       '<div class="thumb' + (imgs.length > 1 ? ' has-alt' : '') + '">' + badge + count +
         '<img class="img-main" src="' + imgs[0] + '" alt="' + name + '" loading="lazy">' + alt + dots +
@@ -59,7 +64,13 @@ window.renderProductCard = function (product) {
         '<div class="meta-line">' + product.category + ' &middot; ' + product.color + '</div>' +
         '<h3>' + product.name + '</h3>' +
         '<div class="price' + (product.sale ? ' price-sale' : '') + '">' + window.formatPrice(product) + (product.sale ? '<span class="sale-tag">Sale</span>' : '') + '</div>' +
+        '<div class="kk-rating" data-kk-rating="' + pid + '"></div>' +
       '</div>' +
-    '</a>'
+    '</a>' +
+    '<div class="kk-card-actions">' +
+      (sold ? '<span class="kk-btn kk-btn-line kk-disabled">Sold out</span>' : '<button type="button" class="kk-btn kk-btn-dark" data-kk-addcard="' + pid + '">Add to basket</button>') +
+      '<a class="kk-wa-link" href="' + waUrl + '" target="_blank" rel="noopener" aria-label="Ask about this piece on WhatsApp">' + (window.KETRAS_WA_ICON || '') + '<span>WhatsApp</span></a>' +
+    '</div>' +
+    '</div>'
   );
 };
