@@ -139,10 +139,10 @@
     RV.p = c.from('product_reviews').select('product_id,name,rating,body,created_at').order('created_at',{ascending:false}).limit(1000)
       .then(function(r){ RV.all = r.data||[]; return RV.all; }, function(){ RV.all=[]; return []; }); return RV.p; };
   RV.paintCards = function(){ RV.load().then(function(all){ document.querySelectorAll('[data-kk-rating]').forEach(function(el){ var id=el.getAttribute('data-kk-rating');
-    var mine=all.filter(function(x){return x.product_id===id}); if(!mine.length){ el.innerHTML=''; return; }
-    var avg=mine.reduce(function(s,x){return s+x.rating},0)/mine.length; el.innerHTML=stars(avg)+'<span class="kk-rc">('+mine.length+')</span>'; }); }); };
+    var mine=all.filter(function(x){return x.product_id===id}); if(!mine.length){ el.innerHTML='<span class="kk-stars kk-stars-empty" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><span class="kk-rc">Be the first to review</span><span class="kk-rv-link" role="link" tabindex="0" data-kk-rv="'+esc(id)+'">Write a review</span>'; return; }
+    var avg=mine.reduce(function(s,x){return s+x.rating},0)/mine.length; el.innerHTML=stars(avg)+'<span class="kk-rc">('+mine.length+')</span><span class="kk-rv-link" role="link" tabindex="0" data-kk-rv="'+esc(id)+'">Write a review</span>'; }); }); };
   RV.mountPiece = function(pid){ var root=document.getElementById('piece-root'); var det=root&&root.querySelector('.detail'); if(!det||document.getElementById('kk-reviews')) return;
-    var sec=document.createElement('section'); sec.id='kk-reviews'; sec.className='kk-reviews';
+    var sec=document.createElement('section'); sec.id='kk-reviews'; if(location.hash==='#kk-reviews') setTimeout(function(){sec.scrollIntoView({behavior:'smooth'})},400); sec.className='kk-reviews';
     det.parentNode.insertBefore(sec, det.nextSibling);
     function draw(){ var mine=(RV.all||[]).filter(function(x){return x.product_id===pid}); var avg=mine.length?mine.reduce(function(s,x){return s+x.rating},0)/mine.length:0;
       sec.innerHTML='<div class="kk-rv-head"><div class="eyebrow-script">Reviews</div><h2 class="display-title">What she said</h2>'+(mine.length?'<p class="kk-rv-sum">'+stars(avg)+' <span>'+avg.toFixed(1)+' · '+mine.length+' review'+(mine.length>1?'s':'')+'</span></p>':'<p class="kk-rv-sum kk-muted">Be the first to review this piece.</p>')+'</div>'+
