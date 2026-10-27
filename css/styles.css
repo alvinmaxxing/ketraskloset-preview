@@ -1081,3 +1081,9 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
  .announce{font-size:9px;letter-spacing:.14em}
  .sale-ribbon{font-size:9px!important;letter-spacing:.18em!important}
 }
+/* v8 compact logo */
+:root{--header-h:64px}
+.site-header .logo-img{width:180px!important;height:auto!important;max-width:none}
+.site-header .header-inner{height:64px;padding-top:0!important;padding-bottom:0!important}
+.logo-foot{width:200px!important;height:auto!important}
+@media(max-width:859px){:root{--header-h:56px}.site-header .header-inner{height:56px}.site-header .logo-img{width:142px!important}.logo-foot{width:170px!important}}
