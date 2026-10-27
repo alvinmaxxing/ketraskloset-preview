@@ -1,5 +1,5 @@
 .gs-wrap{max-width:720px;margin:0 auto;padding:3rem 1.25rem 4rem;border-top:1px solid rgba(169,134,74,.35)}
-.gs-h{font-family:var(--gs-serif,serif);font-weight:400;font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 .4rem;text-align:center}
+.gs-h{font-family:var(--gs-serif,var(--serif,var(--font-serif,serif)));font-weight:400;font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 .4rem;text-align:center}
 .gs-p,.gs-note{text-align:center;color:#6b6460;font-size:.88rem;margin:0 0 1.4rem}.gs-note{margin-top:1rem;font-size:.78rem}
 .gs-form{display:grid;gap:.45rem}.gs-form label{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-top:.5rem}
 .gs-form input,.gs-form textarea{width:100%;box-sizing:border-box;padding:.75rem .85rem;border:1px solid rgba(17,17,17,.2);background:#fff;font:inherit;border-radius:0}

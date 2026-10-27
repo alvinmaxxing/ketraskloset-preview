@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=kk15">
-  <link rel="stylesheet" href="css/giftsend.css?v=kk15">
+  <link rel="stylesheet" href="css/styles.css?v=kk16">
+  <link rel="stylesheet" href="css/giftsend.css?v=kk16">
 </head>
 <body>
   <div class="announce"><span class="sale-word">Closet sale</span> &bull; Pay with Airtel Money +256 700 929 189 &bull; or buy directly on WhatsApp</div>
@@ -122,10 +122,10 @@
   <script src="js/auth-config.js?v=kk3"></script>
   <script src="js/account.js?v=4"></script>
   <script src="js/products.js?v=3"></script>
-  <script src="js/main.js?v=kk15"></script>
+  <script src="js/main.js?v=kk16"></script>
   <script src="js/shop-account.js?v=4"></script>
-  <script src="js/basket.js?v=kk15"></script>
-  <script src="js/giftsend.js?v=kk15"></script>
+  <script src="js/basket.js?v=kk16"></script>
+  <script src="js/giftsend.js?v=kk16"></script>
 
   <script>
   (function(){var amt=100000,f=document.getElementById('gc-form'),cu=document.getElementById('gc-custom');
@@ -137,7 +137,7 @@
    f.addEventListener('submit',function(e){e.preventDefault();var er=document.getElementById('gc-err'),R=window.GiftSend.EMAIL_RE;if(!amt||amt<20000){cu.hidden=false;cu.focus();er.textContent='Minimum gift card is UGX 20,000.';return}
     if(!V('gc-name'))return er.textContent='Enter her name.';if(!R.test(V('gc-email')))return er.textContent='Enter a valid recipient email.';if(!V('gc-from'))return er.textContent='Enter your name.';if(!R.test(V('gc-femail')))return er.textContent='Enter a valid email for you.';er.textContent='';
     window.KK_BASKET.addGift(Math.round(amt),V('gc-name'),V('gc-msg'),{toEmail:V('gc-email'),from:V('gc-from'),fromEmail:V('gc-femail')});window.KK_BASKET.open('bag')});show();
-   window.GiftSend.init({mount:'gift-send',shop:'Ketra’s Kloset',slug:'ketras-kloset',url:'https://alvinmaxxing.github.io/ketraskloset-preview/',bagWord:'basket',codePh:'KK-XXXXXXXXXX',codeRe:/^KK-[A-Z0-9]{6,}$/,fmt:window.formatPrice,
+   window.GiftSend.init({mount:'gift-send',shop:'Ketra’s Kloset',slug:'ketras-kloset',url:'https://alvinmaxxing.github.io/ketraskloset-preview/',bagWord:'basket',amtLabel:'Amount (UGX)',codePh:'KK-XXXXXXXXXX',codeRe:/^KK-[A-Z0-9]{6,}$/,fmt:window.formatPrice,
     serverEnabled:false,fnUrl:window.SHOP_AUTH.url+'/functions/v1/send-gift-card',anonKey:window.SHOP_AUTH.key,
     prefill:function(){var g=window.KK_BASKET.items().filter(function(i){return i.type==='gift'}).pop();return g||{}},
     theme:{bg:'#FAF6EE',ink:'#111111',accent:'#9E2A5E',line:'#A9864A',muted:'#6b6460',serif:'"Cormorant Garamond", Georgia, serif',sans:'Jost, Arial, sans-serif'}})})();

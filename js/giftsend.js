@@ -8,7 +8,7 @@
     root.innerHTML='<h2 class="gs-h">Send your gift card</h2><p class="gs-p">Once you have your code from us, email it to her or download a card to attach.</p>'+
      '<form class="gs-form" novalidate>'+
      '<label for="gs-code">Gift code</label><input id="gs-code" autocomplete="off" placeholder="'+esc(o.codePh)+'" value="">'+
-     '<label for="gs-amt">Amount</label><input id="gs-amt" type="number" min="1" value="'+esc(last.amount||'')+'">'+
+     '<label for="gs-amt">'+esc(o.amtLabel||'Amount')+'</label><input id="gs-amt" type="number" min="1" value="'+esc(last.amount||'')+'">'+
      '<label for="gs-to">Recipient name</label><input id="gs-to" maxlength="60" value="'+esc(last.to||'')+'">'+
      '<label for="gs-email">Recipient email</label><input id="gs-email" type="email" maxlength="120" value="'+esc(last.toEmail||'')+'">'+
      '<label for="gs-from">From</label><input id="gs-from" maxlength="60" value="'+esc(last.from||'')+'">'+
