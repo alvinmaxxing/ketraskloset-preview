@@ -1363,3 +1363,5 @@ html.kk-lock{overflow:hidden}
 .site-header .logo{flex:0 1 auto;min-width:0}
 @media(min-width:860px) and (max-width:1199px){.site-header .header-inner{gap:12px}.site-header .nav{gap:1.1rem;min-width:0;flex:1 1 auto;justify-content:center}.site-header .nav a{font-size:10.5px;letter-spacing:.14em}.site-header .logo{max-width:170px}.site-header .logo img{max-width:100%;height:auto}.site-header .header-actions{gap:4px}}
 @media(max-width:859px){.site-header .header-inner{padding-right:10px!important}.site-header .logo{max-width:150px;overflow:hidden}.site-header .logo img{max-width:100%;height:auto}}
+@media(min-width:860px) and (max-width:1439px){.site-header .nav a[href*="about"],.site-header .nav a[href*="contact"],.site-header .nav a[href*="loyalty"]{display:none}.site-header .logo{max-width:150px}.site-header .nav{gap:1rem}}
+@media(min-width:860px){.site-header .logo{flex:0 0 auto}.site-header .nav{min-width:0}}
