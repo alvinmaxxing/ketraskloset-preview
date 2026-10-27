@@ -996,3 +996,12 @@ h1,h2,.display-title{font-family:var(--serif);font-weight:500;letter-spacing:-.0
 @media(min-width:600px){.jw-form{flex-direction:row}.jw-form input{flex:1}}
 .jw-msg{min-height:1.4em;margin-top:1rem;font-family:var(--serif);font-style:italic;color:var(--champ);font-size:1.05rem;}
 .jw-msg.err{color:#f3a7a7;font-family:var(--font);font-style:normal;font-size:.9rem;}
+
+/* Jewellery logo lockup */
+.jw-title,.jw-h1{margin:0;line-height:0;}
+.jw-logo{display:block;width:min(78vw,420px);height:auto;margin:.5rem auto 1.6rem;}
+.jw-logo-lg{width:min(80vw,500px);margin-top:0;}
+.jw-emblem{display:block;width:64px;height:64px;margin:0 auto 1rem;}
+.jw-fade{opacity:0;transform:translateY(8px);animation:jwFade 1.1s .15s ease-out forwards;}
+@keyframes jwFade{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.jw-fade{animation:none;opacity:1;transform:none}}

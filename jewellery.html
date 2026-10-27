@@ -9,22 +9,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
   <div class="announce"><span class="sale-word">Closet sale</span> &bull; Pay with Airtel Money +256 700 929 189 &bull; or buy directly on WhatsApp</div>
   <header class="site-header">
     <div class="container header-inner">
-      <a class='logo' href='index.html'><img src="assets/logo/ketras-kloset-logo-header.jpg" alt="Ketras Kloset" class="logo-img"></a>
+      <a class='logo' href='/'><img src="assets/logo/ketras-kloset-logo-header.jpg" alt="Ketras Kloset" class="logo-img"></a>
       <button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <nav class="nav">
-        <a href='shop.html'>Shop</a>
-        <a href='shop.html?cat=Dresses'>Dresses</a>
-        <a href='shop.html?cat=Sets'>Sets</a>
-        <a href='about.html'>About</a>
-        <a href='contact.html'>Contact</a>
-        <a class='jw-nav' aria-current='page' href='jewellery.html'>Jewellery</a>
-        <a class='sale' href='shop.html?sale=1'>Sale</a>
+        <a href='/shop'>Shop</a>
+        <a href='/shop?cat=Dresses'>Dresses</a>
+        <a href='/shop?cat=Sets'>Sets</a>
+        <a href='/about'>About</a>
+        <a href='/contact'>Contact</a>
+        <a class='jw-nav' aria-current='page' href='/jewellery'>Jewellery</a>
+        <a class='sale' href='/shop?sale=1'>Sale</a>
       </nav>
       <div class="header-actions">
         <a class="icon-btn wa-btn" href="https://wa.me/256700929189" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
@@ -36,9 +36,8 @@
 
   <main>
     <section class="jw-hero">
-      <img class="jw-mono" src="assets/brand/ketra-jewel-monogram.svg" alt="Ketra monogram">
+      <h1 class="jw-h1"><picture><source type="image/webp" srcset="assets/brand/ketras-jewellery-transparent-gold-deep-600.webp?v=1 600w, assets/brand/ketras-jewellery-transparent-gold-deep-1200.webp?v=1 1200w" sizes="(min-width:700px) 420px, 78vw"><img class="jw-logo jw-fade jw-logo-lg" src="assets/brand/ketras-jewellery-transparent-gold-deep-600.png?v=1" width="600" height="433" alt="Ketra&rsquo;s Jewellery" fetchpriority="high" decoding="async"></picture></h1>
       <div class="jw-badge">Coming soon</div>
-      <h1>Ketra<br><em>Jewellery</em></h1>
       <p class="jw-tag">Timeless pieces. Made to shine with you.</p>
       <p class="jw-line">Champagne gold, soft ivory and a touch of blush. Our first jewellery collection is on its way to the Kloset.</p>
       <a class="btn btn-gold" href="#notify">Notify me when it launches</a>
@@ -56,6 +55,7 @@
 
     <section class="section jw-notify" id="notify">
       <div class="container">
+        <img class="jw-emblem jw-fade" src="assets/brand/ketras-emblem-transparent-gold.svg?v=1" width="64" height="64" alt="" loading="lazy">
         <div class="eyebrow-script light">You are the jewel.</div>
         <h2>Be first to know.</h2>
         <p>Leave your email and we&rsquo;ll tell you the moment Ketra Jewellery launches. No spam.</p>
@@ -73,20 +73,20 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a class='logo' href='index.html'><img src="assets/logo/ketras-kloset-logo-header.jpg" alt="Ketras Kloset" class="logo-img"></a>
+          <a class='logo' href='/'><img src="assets/logo/ketras-kloset-logo-header.jpg" alt="Ketras Kloset" class="logo-img"></a>
           <p>Statement dresses, sets &amp; jumpsuits. Message on WhatsApp to reserve. Pay by Airtel Money.</p>
         </div>
         <div class="footer-col">
           <h4>Shop</h4>
-          <a href='shop.html'>All pieces</a>
-          <a href='shop.html?cat=Dresses'>Dresses</a>
-          <a href='shop.html?cat=Sets'>Sets</a>
-          <a href='shop.html?cat=Jumpsuits'>Jumpsuits</a>
+          <a href='/shop'>All pieces</a>
+          <a href='/shop?cat=Dresses'>Dresses</a>
+          <a href='/shop?cat=Sets'>Sets</a>
+          <a href='/shop?cat=Jumpsuits'>Jumpsuits</a>
         </div>
         <div class="footer-col">
           <h4>Help</h4>
-          <a href='about.html'>About</a>
-          <a href='contact.html'>Contact</a>
+          <a href='/about'>About</a>
+          <a href='/contact'>Contact</a>
           <a class="wa-inline" href="https://wa.me/256700929189" target="_blank" rel="noopener"><svg class="wa-logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#25D366"/><path transform="translate(6.4 6.2) scale(.8)" fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
         </div>
         <div class="footer-col">
