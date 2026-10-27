@@ -1285,3 +1285,14 @@ html.kk-lock{overflow:hidden}
 .kk-bagbtn .kk-count{top:-9px;right:-9px}
 @media(max-width:1599px){.kk-blabel{display:none}.kk-bagbtn{padding:0!important;width:44px!important;height:44px!important;justify-content:center}}
 @media(max-width:700px){.kk-hbtn svg{width:23px;height:23px}.kk-bagbtn{padding:.45rem!important;width:40px!important;height:40px!important;justify-content:center;margin-left:.2rem}}
+
+/* policies v13 */
+.policy{max-width:760px;margin:0 auto;padding:1rem 1.25rem 4rem;font-size:1rem;line-height:1.75;color:var(--ink,#141014)}
+.policy .pol-date{display:inline-block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-deep,#9E2A5E);border:1px solid var(--gold,#B8975A);padding:.35rem .8rem;margin:0 0 1.5rem}
+.policy .pol-lead{font-family:var(--serif,"Playfair Display",Georgia,serif);font-size:1.25rem;line-height:1.55;font-style:italic;margin:0 0 2rem}
+.policy h2{font-family:var(--serif,"Playfair Display",Georgia,serif);font-weight:500;font-size:1.45rem;color:var(--rose-deep,#9E2A5E);margin:2.4rem 0 .6rem;padding-top:1.4rem;border-top:1px solid rgba(184,151,90,.35)}
+.policy ul,.policy ol{padding-left:1.2rem}.policy li{margin:.35rem 0}
+.policy a{color:var(--rose-deep,#9E2A5E);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--gold,#B8975A)}
+.policy .pol-switch{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(184,151,90,.35);font-size:.9rem}
+.pol-agree{font-size:.78rem;line-height:1.5;opacity:.8;margin:.6rem 0 0;text-align:center}.pol-agree a{color:inherit;text-decoration:underline;text-decoration-color:#B8975A}
+@media(max-width:600px){.policy{font-size:.97rem}.policy .pol-lead{font-size:1.1rem}.policy h2{font-size:1.25rem}}
