@@ -1296,3 +1296,36 @@ html.kk-lock{overflow:hidden}
 .policy .pol-switch{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(184,151,90,.35);font-size:.9rem}
 .pol-agree{font-size:.78rem;line-height:1.5;opacity:.8;margin:.6rem 0 0;text-align:center}.pol-agree a{color:inherit;text-decoration:underline;text-decoration-color:#B8975A}
 @media(max-width:600px){.policy{font-size:.97rem}.policy .pol-lead{font-size:1.1rem}.policy h2{font-size:1.25rem}}
+
+/* kk19 editorial full-bleed hero */
+.hero-glam.kh{display:flex;flex-direction:column;justify-content:center;background:#141012;color:#F7F1E8;isolation:isolate;min-height:clamp(620px,calc(100svh - var(--announce-h) - var(--header-h)),900px);max-height:none;height:auto;padding:clamp(64px,8vw,120px) 7vw clamp(110px,9vw,140px);overflow:hidden}
+.hero-glam.kh::before,.hero-glam.kh::after{display:none}
+.khbg,.khs,.khscrim{position:absolute;inset:0}.khbg{z-index:-2}
+.khs{opacity:0;transition:opacity 2.4s cubic-bezier(.4,0,.2,1)}.khs.on{opacity:1}
+.khs img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.khblur{object-fit:cover;filter:blur(40px) brightness(.5) saturate(.8);transform:scale(1.15)}
+.khfg{object-fit:cover;object-position:var(--p)}
+@media(min-width:861px){.khfg{left:auto;width:min(60%,calc(min(900px,100svh)*.85));-webkit-mask-image:linear-gradient(90deg,transparent,#000 26%);mask-image:linear-gradient(90deg,transparent,#000 26%)}}
+.khscrim{z-index:-1;background:linear-gradient(90deg,#140f12f0 0%,#140f12c8 32%,#140f1250 60%,#140f1208 82%),linear-gradient(0deg,#140f1290,transparent 32%)}
+.kh .kh-copy{padding:0;max-width:min(540px,44vw);margin:0;align-self:flex-start}
+.kh .kh-copy .eyebrow-script{color:#D9C08E}
+.kh .kh-copy h1{color:#F7F1E8;font-weight:400;font-size:clamp(2.6rem,4.8vw,4.6rem)}
+.kh .kh-copy h1 em{color:#E3C9A8;background:linear-gradient(90deg,#E8CFA3,#E7B9C6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kh .kh-copy p{color:#EDE4D8;opacity:.85;max-width:34ch}
+.kh .kh-btn{background:#F7F1E8;color:#141012;border:1px solid #F7F1E8;outline:none;border-radius:0;padding:16px 30px;font-size:10.5px;letter-spacing:.28em}
+.kh .kh-btn:hover{background:transparent;color:#F7F1E8}
+.kh .kh-ghost{background:transparent;color:#F7F1E8;border-color:rgba(184,151,90,.7)}.kh .kh-ghost:hover{border-color:#F7F1E8;background:rgba(247,241,232,.06)}
+.kh .kh-stats{border-top-color:rgba(184,151,90,.4);margin-top:2.6rem;max-width:400px}
+.kh .kh-stats strong{color:#F7F1E8}.kh .kh-stats span{color:#CDBFAE}
+.khcap{position:absolute;left:7vw;right:7vw;bottom:30px;display:flex;align-items:center;gap:18px;padding-top:14px;border-top:1px solid rgba(247,241,232,.18);font-size:10.5px;letter-spacing:.22em;color:#F7F1E8}
+.khcap em{font-family:var(--serif);font-style:italic;font-size:17px;letter-spacing:.01em;margin-right:auto;font-weight:400}
+.khdots{display:flex;gap:6px}.khdots i{width:16px;height:1px;background:currentColor;opacity:.3;transition:opacity .8s,width .8s}.khdots i.on{opacity:.95;width:32px;background:#B8975A}
+.khnum{opacity:.75;font-variant-numeric:tabular-nums}.khnum b{font-weight:500}
+@media(max-width:860px){.hero-glam.kh{justify-content:flex-end;min-height:calc(100svh - var(--announce-h) - var(--header-h));padding:58vh 7vw 100px}
+.khfg{height:66%;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
+.khscrim{background:linear-gradient(0deg,#140f12f5 0%,#140f12d0 45%,#140f1200 66%)}
+.kh .kh-copy{max-width:none}.kh .kh-copy h1{font-size:clamp(2.4rem,11vw,3.4rem)}.kh .kh-btn{padding:14px 20px}.khcap{bottom:22px}}
+@media(max-width:860px) and (min-width:600px){.hero-glam.kh{padding-top:56vh}}
+@media(prefers-reduced-motion:reduce){.khs,.khdots i{transition:none}}
+@media(max-width:860px){.hero-glam.kh{padding-top:52svh;min-height:0}.khfg{height:60svh}.kh .kh-stats{margin-top:1.8rem;padding-top:1.1rem}.kh .kh-stats strong{font-size:1.5rem}.kh .kh-copy p{margin-bottom:1.5rem}}
+@media(max-width:860px) and (min-width:600px){.hero-glam.kh{padding-top:56svh}.khfg{height:64svh}}
