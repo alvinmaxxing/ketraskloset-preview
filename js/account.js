@@ -64,7 +64,7 @@ function wire(){
   }catch(err){msg(err.message||String(err))}busy(b,false,lbl)}
 }
 async function google(){if(!C.google){msg('Google sign-in is being switched on. Please use email for now.');return}
- const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)msg(error.message)}
+ const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:C.redirect||(location.origin+location.pathname)}});if(error)msg(error.message)}
 async function faceLogin(){msg('','');try{const o=await call('passkey-login-options');if(o.error)throw new Error(o.error);
  const resp=await SimpleWebAuthnBrowser.startAuthentication({optionsJSON:o.options});const v=await call('passkey-login-verify',{challengeId:o.challengeId,response:resp});if(v.error)throw new Error(v.error);
  const {error}=await sb.auth.verifyOtp({token_hash:v.token_hash,type:'magiclink'});if(error)throw error;close();toast('Signed in with Face ID ✦')}
