@@ -92,7 +92,7 @@
       else h+='<p class="kk-note">Kloset Circle: '+state.pts+' points. Redeem from 100 points. <a href="loyalty.html">How it works</a></p>';
     } else h+='<p class="kk-note"><a href="loyalty.html">Kloset Circle</a>: sign in to earn points on this order.</p>';
     h+='<dl class="kk-sum"><dt>Subtotal</dt><dd>'+fmt(t.sub)+'</dd>'+(t.gift?'<dt>Gift card</dt><dd>−'+fmt(t.gift)+'</dd>':'')+(t.ptsOff?'<dt>Points ('+t.ptsUsed+')</dt><dd>−'+fmt(t.ptsOff)+'</dd>':'')+'<dt class="kk-tot">Total</dt><dd class="kk-tot">'+fmt(t.total)+'</dd></dl>';
-    h+='<a class="kk-btn kk-btn-dark" id="kk-wa-order" href="'+waLink()+'" target="_blank" rel="noopener">Order on WhatsApp</a>'; h+='<p class="pol-agree">By ordering you agree to our <a href="returns.html">Returns</a> and <a href="privacy.html">Privacy</a> policies.</p>';
+    h+='<a class="kk-btn kk-btn-dark" id="kk-wa-order" href="'+waLink()+'" target="_blank" rel="noopener">Order on WhatsApp</a>'; h+='<p class="pol-agree">By ordering you agree to our <a href="returns.html">Final sale</a> and <a href="privacy.html">Privacy</a> policies.</p><p class="pol-agree kk-final">Closet sale pieces are final sale: no returns, refunds or exchanges.</p>';
     h+='<p class="kk-note kk-center">Pay by Airtel Money to <b>+256 700 929 189</b>. We confirm availability and delivery in the chat.</p></div>';
     return h; }
 
