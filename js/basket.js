@@ -18,7 +18,7 @@
     items: function(){ return ld(BK); },
     has: function(id){ return ld(BK).some(function(i){return i.type==='piece'&&i.id===id}); },
     addPiece: function(id){ if (B.has(id)) return false; var l=ld(BK); l.push({type:'piece',id:id}); sv(BK,l); paint(); return true; },
-    addGift: function(amount,to,msg){ var l=ld(BK); l.push({type:'gift',gid:'G'+Date.now().toString(36),amount:amount,to:to||'',msg:msg||''}); sv(BK,l); paint(); },
+    addGift: function(amount,to,msg,x){ x=x||{}; var l=ld(BK); l.push({type:'gift',gid:'G'+Date.now().toString(36),amount:amount,to:to||'',msg:msg||'',toEmail:x.toEmail||'',from:x.from||'',fromEmail:x.fromEmail||''}); sv(BK,l); paint(); },
     remove: function(key){ sv(BK, ld(BK).filter(function(i){return (i.id||i.gid)!==key})); paint(); },
     favs: function(){ return ld(FV); },
     isFav: function(id){ return ld(FV).indexOf(id)>=0; },
@@ -28,7 +28,7 @@
   };
 
   function lines(){ return ld(BK).map(function(i){
-    if (i.type==='gift') return {key:i.gid, gift:true, name:'Gift card'+(i.to?' for '+i.to:''), sub:i.msg?'“'+i.msg+'”':'Digital code sent on WhatsApp', price:+i.amount, img:null};
+    if (i.type==='gift') return {key:i.gid, gift:true, name:'Gift card'+(i.to?' for '+i.to:''), sub:(i.toEmail?'Email to '+i.toEmail+(i.msg?' · ':''):'')+(i.msg?'“'+i.msg+'”':(i.toEmail?'':'Digital code sent on WhatsApp')), raw:i, price:+i.amount, img:null};
     var p = window.getProduct && window.getProduct(i.id); if (!p) return null;
     var t = window.productThumbs ? window.productThumbs(p)[0] : p.image;
     return {key:p.id, id:p.id, name:p.name, sub:p.category+' · '+p.color, price:+(p.price_ugx||0), img:t, sold:p.available===false};
@@ -42,7 +42,7 @@
 
   function waLink(){ var t=totals(); if(!t.L.length) return WA_NUM;
     var m = "Hi Ketra's Kloset! I'd like to order:\n";
-    t.L.forEach(function(l,i){ m += (i+1)+'. '+l.name+(l.id?' ('+l.id+')':'')+(l.gift&&l.sub&&l.sub.charAt(0)==='“'?' '+l.sub:'')+' — '+fmt(l.price)+'\n'; });
+    t.L.forEach(function(l,i){ m += (i+1)+'. '+l.name+(l.id?' ('+l.id+')':'')+(l.gift&&l.raw.msg?' “'+l.raw.msg+'”':'')+' — '+fmt(l.price)+'\n'+(l.gift&&l.raw.toEmail?'   Recipient email: '+l.raw.toEmail+'\n':'')+(l.gift&&(l.raw.from||l.raw.fromEmail)?'   From: '+[l.raw.from,l.raw.fromEmail].filter(Boolean).join(', ')+'\n':''); });
     m += 'Subtotal: '+fmt(t.sub)+'\n';
     if (t.gift) m += 'Gift card '+state.gift+': −'+fmt(t.gift)+' (please confirm balance)\n';
     if (t.ptsOff) m += 'Kloset Circle: redeem '+t.ptsUsed+' points −'+fmt(t.ptsOff)+' (please confirm)\n';
@@ -50,15 +50,15 @@
     if (window.ACCT && window.ACCT.user()) m += '\nAccount: '+window.ACCT.user().email;
     return WA_NUM + '?text=' + encodeURIComponent(m); }
 
-  var ICON_BAG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M9 8V6.5a3 3 0 016 0V8" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>';
+  var ICON_BAG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8V6.5a3 3 0 016 0V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
   var ICON_HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z" fill="var(--kk-hf,none)" stroke="currentColor" stroke-width="1.3"/></svg>';
   window.KK_ICON_HEART = ICON_HEART;
 
   function mountHeader(){ var h=document.querySelector('.header-actions'); if(!h||document.getElementById('kk-bag-btn')) return;
     var f=document.createElement('button'); f.type='button'; f.id='kk-fav-btn'; f.className='icon-btn kk-hbtn'; f.setAttribute('aria-label','Favourites');
     f.innerHTML=ICON_HEART+'<span class="kk-count" id="kk-fav-count" hidden>0</span>'; f.onclick=function(){open('fav')};
-    var b=document.createElement('button'); b.type='button'; b.id='kk-bag-btn'; b.className='icon-btn kk-hbtn'; b.setAttribute('aria-label','Basket');
-    b.innerHTML=ICON_BAG+'<span class="kk-count" id="kk-bag-count" hidden>0</span>'; b.onclick=function(){open('bag')};
+    var b=document.createElement('button'); b.type='button'; b.id='kk-bag-btn'; b.className='icon-btn kk-hbtn kk-bagbtn'; b.setAttribute('aria-label','Basket');
+    b.innerHTML=ICON_BAG+'<span class="kk-blabel">Basket</span><span class="kk-count" id="kk-bag-count" hidden>0</span>'; b.onclick=function(){open('bag')};
     h.appendChild(f); h.appendChild(b);
     var d=document.createElement('div'); d.id='kk-drawer'; d.setAttribute('hidden','');
     d.innerHTML='<div class="kk-scrim" data-kk-close></div><aside class="kk-panel" role="dialog" aria-modal="true" aria-label="Basket">'+

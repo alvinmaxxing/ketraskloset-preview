@@ -16,7 +16,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=kk14">
+  <link rel="stylesheet" href="css/styles.css?v=kk15">
+  <link rel="stylesheet" href="css/giftsend.css?v=kk15">
 </head>
 <body>
   <div class="announce"><span class="sale-word">Closet sale</span> &bull; Pay with Airtel Money +256 700 929 189 &bull; or buy directly on WhatsApp</div>
@@ -55,7 +56,7 @@
         <ol class="kk-steps" style="margin-top:2.2rem">
           <li>Choose an amount and add it to your basket.</li>
           <li>Order on WhatsApp and pay by Airtel Money to +256 700 929 189.</li>
-          <li>Once paid, we send you a gift code to share. She enters it in her basket.</li>
+          <li>Once paid, we send you her gift code. Email it to her below or download a card to attach.</li>
         </ol>
       </div>
       <form class="kk-form" id="gc-form">
@@ -69,12 +70,20 @@
         <input id="gc-custom" type="number" min="20000" step="5000" placeholder="Custom amount in UGX (min 20,000)" hidden>
         <label for="gc-name">Recipient name</label>
         <input id="gc-name" maxlength="60" placeholder="Her name" required>
+        <label for="gc-email">Recipient email</label>
+        <input id="gc-email" type="email" maxlength="120" placeholder="her@email.com" required>
+        <label for="gc-from">Your name</label>
+        <input id="gc-from" maxlength="60" placeholder="Your name" required>
+        <label for="gc-femail">Your email</label>
+        <input id="gc-femail" type="email" maxlength="120" placeholder="you@email.com" required>
+        <p class="gs-err" id="gc-err" role="alert"></p>
         <label for="gc-msg">Message (optional)</label>
         <textarea id="gc-msg" rows="3" maxlength="200" placeholder="A few words for her"></textarea>
         <button class="kk-btn kk-btn-dark" type="submit">Buy gift card</button>
         <p class="kk-note">Codes are issued by the shop after payment is confirmed. Balances are confirmed on WhatsApp when a code is used. Gift cards can’t be exchanged for cash.</p>
       </form>
     </section>
+    <section class="gs-wrap" id="gift-send"></section>
   </main>
 
   <footer class="site-footer">
@@ -113,9 +122,10 @@
   <script src="js/auth-config.js?v=kk3"></script>
   <script src="js/account.js?v=4"></script>
   <script src="js/products.js?v=3"></script>
-  <script src="js/main.js?v=kk14"></script>
+  <script src="js/main.js?v=kk15"></script>
   <script src="js/shop-account.js?v=4"></script>
-  <script src="js/basket.js?v=kk14"></script>
+  <script src="js/basket.js?v=kk15"></script>
+  <script src="js/giftsend.js?v=kk15"></script>
 
   <script>
   (function(){var amt=100000,f=document.getElementById('gc-form'),cu=document.getElementById('gc-custom');
@@ -123,8 +133,14 @@
    document.getElementById('gc-amts').addEventListener('click',function(e){var b=e.target.closest('[data-amt]');if(!b)return;document.querySelectorAll('#gc-amts button').forEach(function(x){x.classList.toggle('on',x===b)});
     if(b.dataset.amt==='custom'){cu.hidden=false;cu.focus();amt=+cu.value||0}else{cu.hidden=true;amt=+b.dataset.amt}show()});
    cu.addEventListener('input',function(){amt=+cu.value||0;show()});document.getElementById('gc-name').addEventListener('input',show);
-   f.addEventListener('submit',function(e){e.preventDefault();if(!amt||amt<20000){cu.hidden=false;cu.focus();return}
-    window.KK_BASKET.addGift(Math.round(amt),document.getElementById('gc-name').value.trim(),document.getElementById('gc-msg').value.trim());window.KK_BASKET.open('bag')});show()})();
+   function V(i){return document.getElementById(i).value.trim()}
+   f.addEventListener('submit',function(e){e.preventDefault();var er=document.getElementById('gc-err'),R=window.GiftSend.EMAIL_RE;if(!amt||amt<20000){cu.hidden=false;cu.focus();er.textContent='Minimum gift card is UGX 20,000.';return}
+    if(!V('gc-name'))return er.textContent='Enter her name.';if(!R.test(V('gc-email')))return er.textContent='Enter a valid recipient email.';if(!V('gc-from'))return er.textContent='Enter your name.';if(!R.test(V('gc-femail')))return er.textContent='Enter a valid email for you.';er.textContent='';
+    window.KK_BASKET.addGift(Math.round(amt),V('gc-name'),V('gc-msg'),{toEmail:V('gc-email'),from:V('gc-from'),fromEmail:V('gc-femail')});window.KK_BASKET.open('bag')});show();
+   window.GiftSend.init({mount:'gift-send',shop:'Ketra’s Kloset',slug:'ketras-kloset',url:'https://alvinmaxxing.github.io/ketraskloset-preview/',bagWord:'basket',codePh:'KK-XXXXXXXXXX',codeRe:/^KK-[A-Z0-9]{6,}$/,fmt:window.formatPrice,
+    serverEnabled:false,fnUrl:window.SHOP_AUTH.url+'/functions/v1/send-gift-card',anonKey:window.SHOP_AUTH.key,
+    prefill:function(){var g=window.KK_BASKET.items().filter(function(i){return i.type==='gift'}).pop();return g||{}},
+    theme:{bg:'#FAF6EE',ink:'#111111',accent:'#9E2A5E',line:'#A9864A',muted:'#6b6460',serif:'"Cormorant Garamond", Georgia, serif',sans:'Jost, Arial, sans-serif'}})})();
   </script>
 </body>
 </html>

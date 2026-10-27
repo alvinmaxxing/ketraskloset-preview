@@ -1274,3 +1274,14 @@ html.kk-lock{overflow:hidden}
 .kk-body{overflow-x:hidden}
 .kk-card .look-count{right:52px}
 @media(max-width:700px){.header-actions{gap:.15rem}.header-actions .wa-btn{display:none}.kk-hbtn{width:34px;height:34px}.kk-hbtn svg{width:20px;height:20px}.kk-heart{width:30px;height:30px;top:8px;right:8px}.kk-card .look-count{right:44px}}
+
+/* kk15: prominent basket */
+.kk-hbtn{color:#111}
+.kk-hbtn svg{width:24px;height:24px}
+.kk-bagbtn{width:auto!important;display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .95rem!important;border:1px solid #111!important;border-radius:0;margin-left:.35rem;height:auto!important}
+.kk-bagbtn:hover{background:#111;color:#fff}
+.kk-blabel{font:500 .68rem/1 var(--font);letter-spacing:.2em;text-transform:uppercase}
+.kk-count{background:#9E2A5E;top:-7px;right:-8px;min-width:19px;height:19px;font-size:.64rem;line-height:19px;border-radius:10px;box-shadow:0 0 0 2px var(--kk-ivory,#FAF6EE)}
+.kk-bagbtn .kk-count{top:-9px;right:-9px}
+@media(max-width:1599px){.kk-blabel{display:none}.kk-bagbtn{padding:0!important;width:44px!important;height:44px!important;justify-content:center}}
+@media(max-width:700px){.kk-hbtn svg{width:23px;height:23px}.kk-bagbtn{padding:.45rem!important;width:40px!important;height:40px!important;justify-content:center;margin-left:.2rem}}
